@@ -1,0 +1,49 @@
+2025-12-21 17:04:53.876 [main] INFO  com.example.Main - Starting Hibernate CRUD application
+2025-12-21 17:05:20.050 [main] INFO  com.example.service.UserService - Получение всех пользователей
+2025-12-21 17:05:20.887 [main] DEBUG org.hibernate.SQL - 
+    
+    create table users (
+       id  bigserial not null,
+        age int4,
+        created_at timestamp,
+        email varchar(255) not null,
+        name varchar(255) not null,
+        primary key (id)
+    )
+2025-12-21 17:05:20.893 [main] DEBUG org.hibernate.SQL - 
+    
+    alter table users 
+       drop constraint UK_6dotkott2kjsp8vw4d0m25fb7
+2025-12-21 17:05:20.896 [main] DEBUG org.hibernate.SQL - 
+    
+    alter table users 
+       add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email)
+2025-12-21 17:05:20.977 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_,
+        user0_.age as age2_0_,
+        user0_.created_at as created_3_0_,
+        user0_.email as email4_0_,
+        user0_.name as name5_0_ 
+    from
+        users user0_
+2025-12-21 17:05:42.489 [main] INFO  com.example.service.UserService - Создание пользователя: john, spooky@example.com
+2025-12-21 17:05:42.493 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_,
+        user0_.age as age2_0_,
+        user0_.created_at as created_3_0_,
+        user0_.email as email4_0_,
+        user0_.name as name5_0_ 
+    from
+        users user0_ 
+    where
+        user0_.email=?
+2025-12-21 17:05:42.504 [main] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (age, created_at, email, name) 
+    values
+        (?, ?, ?, ?)
+2025-12-21 17:05:42.514 [main] INFO  com.example.dao.UserDaoImpl - Пользователь сохранен: spooky@example.com

@@ -1,106 +1,69 @@
-package com.example.dao;
+package com.example.service;
 
+import com.example.dao.UserDao;
+import com.example.dao.UserDaoImpl;
 import com.example.entity.User;
-import com.example.util.HibernateUtil;
 import lombok.extern.log4j.Log4j2;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 import java.util.List;
 import java.util.Optional;
 
 @Log4j2
-public class UserDaoImpl implements UserDao {
+public class UserService {
 
-    @Override
-    public User save(User user) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            session.save(user);
-            transaction.commit();
-            log.info("Пользователь сохранен: {}", user.getEmail());
-            return user;
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            log.error("Ошибка при сохранении пользователя: {}", e.getMessage(), e);
-            throw new RuntimeException("Ошибка сохранения пользователя", e);
-        }
+    private final UserDao userDao;
+
+    public UserService() {
+        this.userDao = new UserDaoImpl();
     }
 
-    @Override
-    public Optional<User> findById(Long id) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            User user = session.get(User.class, id);
-            return Optional.ofNullable(user);
-        } catch (Exception e) {
-            log.error("Ошибка при поиске пользователя по ID {}: {}", id, e.getMessage(), e);
-            throw new RuntimeException("Ошибка поиска пользователя", e);
+    public User createUser(String name, String email, Integer age) {
+        log.info("Создание пользователя: {}, {}", name, email);
+
+        Optional<User> existingUser = userDao.findByEmail(email);
+        if (existingUser.isPresent()) {
+            log.warn("Пользователь с email {} уже существует", email);
+            throw new RuntimeException("Пользователь с таким email уже существует");
         }
+
+        User user = User.builder()
+                .name(name)
+                .email(email)
+                .age(age)
+                .build();
+
+        return userDao.save(user);
     }
 
-    @Override
-    public List<User> findAll() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<User> query = session.createQuery("FROM User", User.class);
-            return query.list();
-        } catch (Exception e) {
-            log.error("Ошибка при получении всех пользователей: {}", e.getMessage(), e);
-            throw new RuntimeException("Ошибка получения списка пользователей", e);
-        }
+    public Optional<User> getUserById(Long id) {
+        log.info("Получение пользователя по ID: {}", id);
+        return userDao.findById(id);
     }
 
-    @Override
-    public User update(User user) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            session.update(user);
-            transaction.commit();
-            log.info("Пользователь обновлен: {}", user.getEmail());
-            return user;
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            log.error("Ошибка при обновлении пользователя: {}", e.getMessage(), e);
-            throw new RuntimeException("Ошибка обновления пользователя", e);
-        }
+    public List<User> getAllUsers() {
+        log.info("Получение всех пользователей");
+        return userDao.findAll();
     }
 
-    @Override
-    public void delete(Long id) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            User user = session.get(User.class, id);
-            if (user != null) {
-                session.delete(user);
-                log.info("Пользователь удален: ID {}", id);
-            }
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            log.error("Ошибка при удалении пользователя ID {}: {}", id, e.getMessage(), e);
-            throw new RuntimeException("Ошибка удаления пользователя", e);
+    public User updateUser(Long id, String name, String email, Integer age) {
+        log.info("Обновление пользователя ID: {}", id);
+
+        Optional<User> optionalUser = userDao.findById(id);
+        if (optionalUser.isEmpty()) {
+            log.warn("Пользователь с ID {} не найден", id);
+            throw new RuntimeException("Пользователь не найден");
         }
+
+        User user = optionalUser.get();
+        user.setName(name);
+        user.setEmail(email);
+        user.setAge(age);
+
+        return userDao.update(user);
     }
 
-    @Override
-    public Optional<User> findByEmail(String email) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<User> query = session.createQuery(
-                    "FROM User WHERE email = :email", User.class);
-            query.setParameter("email", email);
-            return Optional.ofNullable(query.uniqueResult());
-        } catch (Exception e) {
-            log.error("Ошибка при поиске пользователя по email {}: {}", email, e.getMessage(), e);
-            throw new RuntimeException("Ошибка поиска пользователя по email", e);
-        }
+    public void deleteUser(Long id) {
+        log.info("Удаление пользователя ID: {}", id);
+        userDao.delete(id);
     }
 }
