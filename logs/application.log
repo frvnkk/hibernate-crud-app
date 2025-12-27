@@ -47,3 +47,340 @@
     values
         (?, ?, ?, ?)
 2025-12-21 17:05:42.514 [main] INFO  com.example.dao.UserDaoImpl - РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃРѕС…СЂР°РЅРµРЅ: spooky@example.com
+2025-12-27 21:40:00.473 [main] INFO  com.example.Main - Starting Hibernate CRUD application
+2025-12-27 21:50:51.482 [main] INFO  com.example.Main - Starting Hibernate CRUD application
+2025-12-27 22:03:57.960 [main] INFO  com.example.service.UserService - РџРѕР»СѓС‡РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РїРѕ ID: 999
+2025-12-27 22:03:57.981 [main] INFO  com.example.service.UserService - РћР±РЅРѕРІР»РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ ID: 1
+2025-12-27 22:03:57.986 [main] INFO  com.example.service.UserService - РџРѕР»СѓС‡РµРЅРёРµ РІСЃРµС… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
+2025-12-27 22:03:57.990 [main] INFO  com.example.service.UserService - РћР±РЅРѕРІР»РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ ID: 999
+2025-12-27 22:03:57.990 [main] WARN  com.example.service.UserService - РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃ ID 999 РЅРµ РЅР°Р№РґРµРЅ
+2025-12-27 22:03:57.994 [main] INFO  com.example.service.UserService - РЈРґР°Р»РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ ID: 1
+2025-12-27 22:03:57.997 [main] INFO  com.example.service.UserService - РЎРѕР·РґР°РЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ: New User, existing@example.com
+2025-12-27 22:03:57.998 [main] WARN  com.example.service.UserService - РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃ email existing@example.com СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+2025-12-27 22:03:58.001 [main] INFO  com.example.service.UserService - РЎРѕР·РґР°РЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ: Test User, test@example.com
+2025-12-27 22:03:58.004 [main] INFO  com.example.service.UserService - РџРѕР»СѓС‡РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РїРѕ ID: 1
+2025-12-27 22:04:24.574 [main] INFO  org.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-12-27 22:04:24.579 [main] INFO  org.testcontainers.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-12-27 22:04:34.947 [main] INFO  org.testcontainers.dockerclient.DockerMachineClientProviderStrategy - docker-machine executable was not found on PATH ([C:\Program Files\Common Files\Oracle\Java\javapath, C:\Program Files (x86)\Razer Chroma SDK\bin, C:\Program Files\Razer Chroma SDK\bin, C:\Program Files (x86)\Common Files\Oracle\Java\javapath, C:\WINDOWS\system32, C:\WINDOWS, C:\WINDOWS\System32\Wbem, C:\WINDOWS\System32\WindowsPowerShell\v1.0\, C:\WINDOWS\System32\OpenSSH\, C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common, C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps, C:\Program Files (x86)\Razer\ChromaBroadcast\bin, C:\Program Files\Razer\ChromaBroadcast\bin, C:\Users\User\AppData\Local\Microsoft\WindowsApps, C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR, C:\Program Files\Git\cmd, C:\Program Files\Docker\Docker\resources\bin, C:\Users\User\AppData\Local\Programs\Python\Python313\Scripts\, C:\Users\User\AppData\Local\Programs\Python\Python313\, C:\Users\User\AppData\Local\Programs\Python\Launcher\, C:\Users\User\AppData\Local\Microsoft\WindowsApps, C:\Users\User\AppData\Local\Programs\Microsoft VS Code\bin, C:\Program Files\JetBrains\PyCharm 2024.1.4\bin, , C:\Users\User\AppData\Local\GitHubDesktop\bin])
+2025-12-27 22:04:34.948 [main] ERROR org.testcontainers.dockerclient.DockerClientProviderStrategy - Could not find a valid Docker environment. Please check configuration. Attempted configurations were:
+	NpipeSocketClientProviderStrategy: failed with exception InternalServerErrorException (Status 500: )As no valid configuration was found, execution cannot continue.
+See https://java.testcontainers.org/on_failure.html for more details.
+2025-12-27 23:43:29.850 [main] INFO  org.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-12-27 23:43:29.856 [main] INFO  org.testcontainers.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-12-27 23:43:40.269 [main] INFO  org.testcontainers.dockerclient.DockerMachineClientProviderStrategy - docker-machine executable was not found on PATH ([C:\Program Files\Common Files\Oracle\Java\javapath, C:\Program Files (x86)\Razer Chroma SDK\bin, C:\Program Files\Razer Chroma SDK\bin, C:\Program Files (x86)\Common Files\Oracle\Java\javapath, C:\WINDOWS\system32, C:\WINDOWS, C:\WINDOWS\System32\Wbem, C:\WINDOWS\System32\WindowsPowerShell\v1.0\, C:\WINDOWS\System32\OpenSSH\, C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common, C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps, C:\Program Files (x86)\Razer\ChromaBroadcast\bin, C:\Program Files\Razer\ChromaBroadcast\bin, C:\Users\User\AppData\Local\Microsoft\WindowsApps, C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR, C:\Program Files\Git\cmd, C:\Program Files\Docker\Docker\resources\bin, C:\Users\User\AppData\Local\Programs\Python\Python313\Scripts\, C:\Users\User\AppData\Local\Programs\Python\Python313\, C:\Users\User\AppData\Local\Programs\Python\Launcher\, C:\Users\User\AppData\Local\Microsoft\WindowsApps, C:\Users\User\AppData\Local\Programs\Microsoft VS Code\bin, C:\Program Files\JetBrains\PyCharm 2024.1.4\bin, , C:\Users\User\AppData\Local\GitHubDesktop\bin])
+2025-12-27 23:43:40.270 [main] ERROR org.testcontainers.dockerclient.DockerClientProviderStrategy - Could not find a valid Docker environment. Please check configuration. Attempted configurations were:
+	NpipeSocketClientProviderStrategy: failed with exception InternalServerErrorException (Status 500: )As no valid configuration was found, execution cannot continue.
+See https://java.testcontainers.org/on_failure.html for more details.
+2025-12-27 23:43:41.189 [main] INFO  com.example.service.UserService - Получение пользователя по ID: 999
+2025-12-27 23:43:41.283 [main] INFO  com.example.service.UserService - Обновление пользователя ID: 1
+2025-12-27 23:43:41.295 [main] INFO  com.example.service.UserService - Получение всех пользователей
+2025-12-27 23:43:41.302 [main] INFO  com.example.service.UserService - Обновление пользователя ID: 999
+2025-12-27 23:43:41.302 [main] WARN  com.example.service.UserService - Пользователь с ID 999 не найден
+2025-12-27 23:43:41.311 [main] INFO  com.example.service.UserService - Удаление пользователя ID: 1
+2025-12-27 23:43:41.316 [main] INFO  com.example.service.UserService - Создание пользователя: New User, existing@example.com
+2025-12-27 23:43:41.316 [main] WARN  com.example.service.UserService - Пользователь с email existing@example.com уже существует
+2025-12-27 23:43:41.320 [main] INFO  com.example.service.UserService - Создание пользователя: Test User, test@example.com
+2025-12-27 23:43:41.326 [main] INFO  com.example.service.UserService - Получение пользователя по ID: 1
+2025-12-27 23:44:47.953 [main] INFO  org.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-12-27 23:44:47.959 [main] INFO  org.testcontainers.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-12-27 23:44:58.375 [main] INFO  org.testcontainers.dockerclient.DockerMachineClientProviderStrategy - docker-machine executable was not found on PATH ([C:\Program Files\Common Files\Oracle\Java\javapath, C:\Program Files (x86)\Razer Chroma SDK\bin, C:\Program Files\Razer Chroma SDK\bin, C:\Program Files (x86)\Common Files\Oracle\Java\javapath, C:\WINDOWS\system32, C:\WINDOWS, C:\WINDOWS\System32\Wbem, C:\WINDOWS\System32\WindowsPowerShell\v1.0\, C:\WINDOWS\System32\OpenSSH\, C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common, C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps, C:\Program Files (x86)\Razer\ChromaBroadcast\bin, C:\Program Files\Razer\ChromaBroadcast\bin, C:\Users\User\AppData\Local\Microsoft\WindowsApps, C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR, C:\Program Files\Git\cmd, C:\Program Files\Docker\Docker\resources\bin, C:\Users\User\AppData\Local\Programs\Python\Python313\Scripts\, C:\Users\User\AppData\Local\Programs\Python\Python313\, C:\Users\User\AppData\Local\Programs\Python\Launcher\, C:\Users\User\AppData\Local\Microsoft\WindowsApps, C:\Users\User\AppData\Local\Programs\Microsoft VS Code\bin, C:\Program Files\JetBrains\PyCharm 2024.1.4\bin, , C:\Users\User\AppData\Local\GitHubDesktop\bin])
+2025-12-27 23:44:58.376 [main] ERROR org.testcontainers.dockerclient.DockerClientProviderStrategy - Could not find a valid Docker environment. Please check configuration. Attempted configurations were:
+	NpipeSocketClientProviderStrategy: failed with exception InternalServerErrorException (Status 500: )As no valid configuration was found, execution cannot continue.
+See https://java.testcontainers.org/on_failure.html for more details.
+2025-12-27 23:44:59.294 [main] INFO  com.example.service.UserService - Получение пользователя по ID: 999
+2025-12-27 23:44:59.375 [main] INFO  com.example.service.UserService - Обновление пользователя ID: 1
+2025-12-27 23:44:59.387 [main] INFO  com.example.service.UserService - Получение всех пользователей
+2025-12-27 23:44:59.394 [main] INFO  com.example.service.UserService - Обновление пользователя ID: 999
+2025-12-27 23:44:59.394 [main] WARN  com.example.service.UserService - Пользователь с ID 999 не найден
+2025-12-27 23:44:59.402 [main] INFO  com.example.service.UserService - Удаление пользователя ID: 1
+2025-12-27 23:44:59.406 [main] INFO  com.example.service.UserService - Создание пользователя: New User, existing@example.com
+2025-12-27 23:44:59.406 [main] WARN  com.example.service.UserService - Пользователь с email existing@example.com уже существует
+2025-12-27 23:44:59.410 [main] INFO  com.example.service.UserService - Создание пользователя: Test User, test@example.com
+2025-12-27 23:44:59.416 [main] INFO  com.example.service.UserService - Получение пользователя по ID: 1
+2025-12-27 23:58:33.951 [main] INFO  org.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-12-27 23:58:33.956 [main] INFO  org.testcontainers.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-12-27 23:58:34.477 [main] INFO  org.testcontainers.dockerclient.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-12-27 23:58:34.478 [main] INFO  org.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-12-27 23:58:34.502 [main] INFO  org.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.5.2
+  API Version: 1.51
+  Operating System: Docker Desktop
+  Total Memory: 15814 MB
+2025-12-27 23:58:34.538 [main] INFO  tc.testcontainers/ryuk:0.5.1 - Pulling docker image: testcontainers/ryuk:0.5.1. Please be patient; this may take some time but only needs to be done once.
+2025-12-27 23:58:36.904 [docker-java-stream-307585390] INFO  tc.testcontainers/ryuk:0.5.1 - Starting to pull image
+2025-12-27 23:58:36.919 [docker-java-stream-307585390] INFO  tc.testcontainers/ryuk:0.5.1 - Pulling image layers:  0 pending,  0 downloaded,  0 extracted, (0 bytes/0 bytes)
+2025-12-27 23:58:38.423 [docker-java-stream-307585390] INFO  tc.testcontainers/ryuk:0.5.1 - Pulling image layers:  2 pending,  1 downloaded,  0 extracted, (1 MB/? MB)
+2025-12-27 23:58:38.522 [docker-java-stream-307585390] INFO  tc.testcontainers/ryuk:0.5.1 - Pulling image layers:  1 pending,  2 downloaded,  0 extracted, (1 MB/? MB)
+2025-12-27 23:58:38.823 [docker-java-stream-307585390] INFO  tc.testcontainers/ryuk:0.5.1 - Pulling image layers:  0 pending,  3 downloaded,  0 extracted, (1 MB/2 MB)
+2025-12-27 23:58:38.922 [docker-java-stream-307585390] INFO  tc.testcontainers/ryuk:0.5.1 - Pulling image layers:  0 pending,  3 downloaded,  1 extracted, (1 MB/2 MB)
+2025-12-27 23:58:39.022 [docker-java-stream-307585390] INFO  tc.testcontainers/ryuk:0.5.1 - Pulling image layers:  0 pending,  3 downloaded,  2 extracted, (1 MB/2 MB)
+2025-12-27 23:58:39.082 [docker-java-stream-307585390] INFO  tc.testcontainers/ryuk:0.5.1 - Pulling image layers:  0 pending,  3 downloaded,  3 extracted, (1 MB/2 MB)
+2025-12-27 23:58:39.085 [main] INFO  tc.testcontainers/ryuk:0.5.1 - Image testcontainers/ryuk:0.5.1 pull took PT4.5460354S
+2025-12-27 23:58:39.085 [docker-java-stream-307585390] INFO  tc.testcontainers/ryuk:0.5.1 - Pull complete. 3 layers, pulled in 2s (downloaded 1 MB at 512 KB/s)
+2025-12-27 23:58:39.132 [main] INFO  tc.testcontainers/ryuk:0.5.1 - Creating container for image: testcontainers/ryuk:0.5.1
+2025-12-27 23:58:39.264 [main] INFO  tc.testcontainers/ryuk:0.5.1 - Container testcontainers/ryuk:0.5.1 is starting: 4f7b5dce04e5a8185faf4e3c2273fe67e5220e6bac37dc43d931e44008e0307a
+2025-12-27 23:58:39.846 [main] INFO  tc.testcontainers/ryuk:0.5.1 - Container testcontainers/ryuk:0.5.1 started in PT0.7135399S
+2025-12-27 23:58:39.851 [main] INFO  org.testcontainers.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-12-27 23:58:39.851 [main] INFO  org.testcontainers.DockerClientFactory - Checking the system...
+2025-12-27 23:58:39.852 [main] INFO  org.testcontainers.DockerClientFactory - вњ”пёЋ Docker server version should be at least 1.6.0
+2025-12-27 23:58:39.858 [main] INFO  tc.postgres:15-alpine - Pulling docker image: postgres:15-alpine. Please be patient; this may take some time but only needs to be done once.
+2025-12-27 23:58:41.420 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Starting to pull image
+2025-12-27 23:58:41.421 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  0 pending,  0 downloaded,  0 extracted, (0 bytes/0 bytes)
+2025-12-27 23:58:42.769 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers: 10 pending,  1 downloaded,  0 extracted, (0 bytes/? MB)
+2025-12-27 23:58:43.169 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  9 pending,  2 downloaded,  0 extracted, (0 bytes/? MB)
+2025-12-27 23:58:43.269 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  8 pending,  3 downloaded,  0 extracted, (0 bytes/? MB)
+2025-12-27 23:58:43.269 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  7 pending,  4 downloaded,  0 extracted, (0 bytes/? MB)
+2025-12-27 23:58:43.368 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  6 pending,  5 downloaded,  0 extracted, (0 bytes/? MB)
+2025-12-27 23:58:43.369 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  5 pending,  6 downloaded,  0 extracted, (0 bytes/? MB)
+2025-12-27 23:58:43.370 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  4 pending,  7 downloaded,  0 extracted, (0 bytes/? MB)
+2025-12-27 23:58:43.371 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  3 pending,  8 downloaded,  0 extracted, (0 bytes/? MB)
+2025-12-27 23:58:43.372 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  2 pending,  9 downloaded,  0 extracted, (0 bytes/? MB)
+2025-12-27 23:58:43.568 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  1 pending, 10 downloaded,  0 extracted, (3 MB/? MB)
+2025-12-27 23:58:43.769 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  1 pending, 10 downloaded,  1 extracted, (11 MB/? MB)
+2025-12-27 23:58:43.771 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  1 pending, 10 downloaded,  2 extracted, (11 MB/? MB)
+2025-12-27 23:58:43.772 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  1 pending, 10 downloaded,  3 extracted, (11 MB/? MB)
+2025-12-27 23:58:43.871 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  1 pending, 10 downloaded,  4 extracted, (13 MB/? MB)
+2025-12-27 23:58:43.872 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  1 pending, 10 downloaded,  5 extracted, (13 MB/? MB)
+2025-12-27 23:58:48.068 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  0 pending, 11 downloaded,  5 extracted, (101 MB/103 MB)
+2025-12-27 23:58:49.668 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  0 pending, 11 downloaded,  6 extracted, (101 MB/103 MB)
+2025-12-27 23:58:49.669 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  0 pending, 11 downloaded,  7 extracted, (101 MB/103 MB)
+2025-12-27 23:58:49.670 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  0 pending, 11 downloaded,  8 extracted, (101 MB/103 MB)
+2025-12-27 23:58:49.671 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  0 pending, 11 downloaded,  9 extracted, (101 MB/103 MB)
+2025-12-27 23:58:49.671 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  0 pending, 11 downloaded, 10 extracted, (101 MB/103 MB)
+2025-12-27 23:58:49.698 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pulling image layers:  0 pending, 11 downloaded, 11 extracted, (101 MB/103 MB)
+2025-12-27 23:58:49.700 [docker-java-stream-1401982887] INFO  tc.postgres:15-alpine - Pull complete. 11 layers, pulled in 8s (downloaded 101 MB at 12 MB/s)
+2025-12-27 23:58:49.700 [main] INFO  tc.postgres:15-alpine - Image postgres:15-alpine pull took PT9.8419784S
+2025-12-27 23:58:49.748 [main] INFO  tc.postgres:15-alpine - Creating container for image: postgres:15-alpine
+2025-12-27 23:58:49.998 [main] INFO  tc.postgres:15-alpine - Container postgres:15-alpine is starting: dca02b2762b54a317e072e6e6add20646030fea04020d77222ceec6cf4533687
+2025-12-27 23:58:51.638 [main] INFO  tc.postgres:15-alpine - Container postgres:15-alpine started in PT1.889881S
+2025-12-27 23:58:51.638 [main] INFO  tc.postgres:15-alpine - Container is started (JDBC URL: jdbc:postgresql://localhost:50808/testdb?loggerLevel=OFF)
+2025-12-27 23:58:53.395 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.413 [main] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (age, created_at, email, name) 
+    values
+        (?, ?, ?, ?)
+2025-12-27 23:58:53.426 [main] INFO  com.example.dao.UserDaoImpl - РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃРѕС…СЂР°РЅРµРЅ: john@example.com
+2025-12-27 23:58:53.433 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.438 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.439 [main] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (age, created_at, email, name) 
+    values
+        (?, ?, ?, ?)
+2025-12-27 23:58:53.441 [main] INFO  com.example.dao.UserDaoImpl - РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃРѕС…СЂР°РЅРµРЅ: user1@test.com
+2025-12-27 23:58:53.441 [main] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (age, created_at, email, name) 
+    values
+        (?, ?, ?, ?)
+2025-12-27 23:58:53.442 [main] INFO  com.example.dao.UserDaoImpl - РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃРѕС…СЂР°РЅРµРЅ: user2@test.com
+2025-12-27 23:58:53.452 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_,
+        user0_.age as age2_0_,
+        user0_.created_at as created_3_0_,
+        user0_.email as email4_0_,
+        user0_.name as name5_0_ 
+    from
+        users user0_
+2025-12-27 23:58:53.459 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.462 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.468 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_,
+        user0_.age as age2_0_,
+        user0_.created_at as created_3_0_,
+        user0_.email as email4_0_,
+        user0_.name as name5_0_ 
+    from
+        users user0_ 
+    where
+        user0_.email=?
+2025-12-27 23:58:53.471 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.473 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.474 [main] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (age, created_at, email, name) 
+    values
+        (?, ?, ?, ?)
+2025-12-27 23:58:53.475 [main] INFO  com.example.dao.UserDaoImpl - РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃРѕС…СЂР°РЅРµРЅ: original@example.com
+2025-12-27 23:58:53.480 [main] DEBUG org.hibernate.SQL - 
+    update
+        users 
+    set
+        age=?,
+        email=?,
+        name=? 
+    where
+        id=?
+2025-12-27 23:58:53.484 [main] INFO  com.example.dao.UserDaoImpl - РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ РѕР±РЅРѕРІР»РµРЅ: updated@example.com
+2025-12-27 23:58:53.484 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.486 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.488 [main] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (age, created_at, email, name) 
+    values
+        (?, ?, ?, ?)
+2025-12-27 23:58:53.489 [main] INFO  com.example.dao.UserDaoImpl - РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃРѕС…СЂР°РЅРµРЅ: jane@example.com
+2025-12-27 23:58:53.492 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_0_,
+        user0_.age as age2_0_0_,
+        user0_.created_at as created_3_0_0_,
+        user0_.email as email4_0_0_,
+        user0_.name as name5_0_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+2025-12-27 23:58:53.496 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.498 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.499 [main] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (age, created_at, email, name) 
+    values
+        (?, ?, ?, ?)
+2025-12-27 23:58:53.501 [main] INFO  com.example.dao.UserDaoImpl - РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃРѕС…СЂР°РЅРµРЅ: test@example.com
+2025-12-27 23:58:53.501 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_,
+        user0_.age as age2_0_,
+        user0_.created_at as created_3_0_,
+        user0_.email as email4_0_,
+        user0_.name as name5_0_ 
+    from
+        users user0_ 
+    where
+        user0_.email=?
+2025-12-27 23:58:53.502 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.504 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.505 [main] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (age, created_at, email, name) 
+    values
+        (?, ?, ?, ?)
+2025-12-27 23:58:53.506 [main] INFO  com.example.dao.UserDaoImpl - РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃРѕС…СЂР°РЅРµРЅ: delete@example.com
+2025-12-27 23:58:53.507 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_0_,
+        user0_.age as age2_0_0_,
+        user0_.created_at as created_3_0_0_,
+        user0_.email as email4_0_0_,
+        user0_.name as name5_0_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+2025-12-27 23:58:53.509 [main] INFO  com.example.dao.UserDaoImpl - РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СѓРґР°Р»РµРЅ: ID 8
+2025-12-27 23:58:53.509 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-12-27 23:58:53.511 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_0_,
+        user0_.age as age2_0_0_,
+        user0_.created_at as created_3_0_0_,
+        user0_.email as email4_0_0_,
+        user0_.name as name5_0_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+2025-12-27 23:58:53.512 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.514 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.515 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_0_,
+        user0_.age as age2_0_0_,
+        user0_.created_at as created_3_0_0_,
+        user0_.email as email4_0_0_,
+        user0_.name as name5_0_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+2025-12-27 23:58:53.517 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.519 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.520 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_,
+        user0_.age as age2_0_,
+        user0_.created_at as created_3_0_,
+        user0_.email as email4_0_,
+        user0_.name as name5_0_ 
+    from
+        users user0_
+2025-12-27 23:58:53.520 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-27 23:58:53.524 [main] INFO  com.example.util.HibernateUtil - SessionFactory Р·Р°РєСЂС‹С‚Р°

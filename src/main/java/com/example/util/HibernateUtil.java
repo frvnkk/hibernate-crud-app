@@ -10,7 +10,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 @Log4j2
 public class HibernateUtil {
 
-    private static final SessionFactory sessionFactory = buildSessionFactory();
+    private static SessionFactory sessionFactory;
 
     private static SessionFactory buildSessionFactory() {
         try {
@@ -30,8 +30,20 @@ public class HibernateUtil {
         }
     }
 
-    public static SessionFactory getSessionFactory() {
+    // Измененный метод - теперь создает фабрику при необходимости
+    public static synchronized SessionFactory getSessionFactory() {
+        if (sessionFactory == null || sessionFactory.isClosed()) {
+            sessionFactory = buildSessionFactory();
+        }
         return sessionFactory;
+    }
+
+    // Новый метод для тестов - позволяет пересоздать SessionFactory
+    public static synchronized void resetSessionFactory() {
+        if (sessionFactory != null && !sessionFactory.isClosed()) {
+            sessionFactory.close();
+        }
+        sessionFactory = null;
     }
 
     public static void shutdown() {
