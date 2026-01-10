@@ -1,73 +1,87 @@
 package com.example.service;
 
-import com.example.dao.UserDao;
-import com.example.dao.UserDaoImpl;
+import com.example.dto.UserRequestDto;
+import com.example.dto.UserResponseDto;
+import com.example.dto.UserMapper;
 import com.example.entity.User;
-import lombok.extern.log4j.Log4j2;
+import com.example.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
-@Log4j2
+@Slf4j
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class UserService {
 
-    private final UserDao userDao;
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public UserService(UserDao userDao) {
-        this.userDao = userDao;
-    }
+    @Transactional
+    public UserResponseDto createUser(UserRequestDto requestDto) {
+        log.info("Creating user: {}, {}", requestDto.getName(), requestDto.getEmail());
 
-    public UserService() {
-        this.userDao = new UserDaoImpl();
-    }
-
-    public User createUser(String name, String email, Integer age) {
-        log.info("Создание пользователя: {}, {}", name, email);
-
-        Optional<User> existingUser = userDao.findByEmail(email);
-        if (existingUser.isPresent()) {
-            log.warn("Пользователь с email {} уже существует", email);
-            throw new RuntimeException("Пользователь с таким email уже существует");
+        if (userRepository.existsByEmail(requestDto.getEmail())) {
+            throw new RuntimeException("User with email " + requestDto.getEmail() + " already exists");
         }
 
-        User user = User.builder()
-                .name(name)
-                .email(email)
-                .age(age)
-                .build();
+        User user = userMapper.toEntity(requestDto);
+        User savedUser = userRepository.save(user);
 
-        return userDao.save(user);
+        return userMapper.toDto(savedUser);
     }
 
-    public Optional<User> getUserById(Long id) {
-        log.info("Получение пользователя по ID: {}", id);
-        return userDao.findById(id);
+    public UserResponseDto getUserById(Long id) {
+        log.info("Getting user by ID: {}", id);
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+
+        return userMapper.toDto(user);
     }
 
-    public List<User> getAllUsers() {
-        log.info("Получение всех пользователей");
-        return userDao.findAll();
+    public List<UserResponseDto> getAllUsers() {
+        log.info("Getting all users");
+
+        return userRepository.findAll().stream()
+                .map(userMapper::toDto)
+                .collect(Collectors.toList());
     }
 
-    public User updateUser(Long id, String name, String email, Integer age) {
-        log.info("Обновление пользователя ID: {}", id);
+    @Transactional
+    public UserResponseDto updateUser(Long id, UserRequestDto requestDto) {
+        log.info("Updating user ID: {}", id);
 
-        Optional<User> optionalUser = userDao.findById(id);
-        if (optionalUser.isEmpty()) {
-            log.warn("Пользователь с ID {} не найден", id);
-            throw new RuntimeException("Пользователь не найден");
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+
+        // Проверяем, не занят ли новый email другим пользователем
+        if (!user.getEmail().equals(requestDto.getEmail()) &&
+                userRepository.existsByEmail(requestDto.getEmail())) {
+            throw new RuntimeException("Email " + requestDto.getEmail() + " is already taken");
         }
 
-        User user = optionalUser.get();
-        user.setName(name);
-        user.setEmail(email);
-        user.setAge(age);
+        user.setName(requestDto.getName());
+        user.setEmail(requestDto.getEmail());
+        user.setAge(requestDto.getAge());
 
-        return userDao.update(user);
+        User updatedUser = userRepository.save(user);
+        return userMapper.toDto(updatedUser);
     }
 
+    @Transactional
     public void deleteUser(Long id) {
-        log.info("Удаление пользователя ID: {}", id);
-        userDao.delete(id);
+        log.info("Deleting user ID: {}", id);
+
+        if (!userRepository.existsById(id)) {
+            throw new RuntimeException("User not found with id: " + id);
+        }
+
+        userRepository.deleteById(id);
     }
 }

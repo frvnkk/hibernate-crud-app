@@ -384,3 +384,263 @@ See https://java.testcontainers.org/on_failure.html for more details.
     from
         users
 2025-12-27 23:58:53.524 [main] INFO  com.example.util.HibernateUtil - SessionFactory Р·Р°РєСЂС‹С‚Р°
+2025-12-28 00:03:32.371 [main] INFO  org.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-12-28 00:03:32.376 [main] INFO  org.testcontainers.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-12-28 00:03:32.665 [main] INFO  org.testcontainers.dockerclient.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-12-28 00:03:32.916 [main] INFO  org.testcontainers.dockerclient.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-12-28 00:03:32.918 [main] INFO  org.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-12-28 00:03:32.938 [main] INFO  org.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.5.2
+  API Version: 1.51
+  Operating System: Docker Desktop
+  Total Memory: 15814 MB
+2025-12-28 00:03:33.015 [main] INFO  tc.testcontainers/ryuk:0.5.1 - Creating container for image: testcontainers/ryuk:0.5.1
+2025-12-28 00:03:33.248 [main] INFO  tc.testcontainers/ryuk:0.5.1 - Container testcontainers/ryuk:0.5.1 is starting: 459da1a4dc247a3d4c964358e6e72fea6c3da039329ac740a503e82535b031b4
+2025-12-28 00:03:33.759 [main] INFO  tc.testcontainers/ryuk:0.5.1 - Container testcontainers/ryuk:0.5.1 started in PT0.743344S
+2025-12-28 00:03:33.765 [main] INFO  org.testcontainers.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-12-28 00:03:33.766 [main] INFO  org.testcontainers.DockerClientFactory - Checking the system...
+2025-12-28 00:03:33.766 [main] INFO  org.testcontainers.DockerClientFactory - ?? Docker server version should be at least 1.6.0
+2025-12-28 00:03:33.767 [main] INFO  tc.postgres:15-alpine - Creating container for image: postgres:15-alpine
+2025-12-28 00:03:33.839 [main] INFO  tc.postgres:15-alpine - Container postgres:15-alpine is starting: 84c54b3eb5c7c5a36e79982cd4a47f875dd399c0937e3157ef9db1532b68907f
+2025-12-28 00:03:35.714 [main] INFO  tc.postgres:15-alpine - Container postgres:15-alpine started in PT1.9465326S
+2025-12-28 00:03:35.715 [main] INFO  tc.postgres:15-alpine - Container is started (JDBC URL: jdbc:postgresql://localhost:49319/testdb?loggerLevel=OFF)
+2025-12-28 00:03:37.104 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.116 [main] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (age, created_at, email, name) 
+    values
+        (?, ?, ?, ?)
+2025-12-28 00:03:37.126 [main] INFO  com.example.dao.UserDaoImpl - Пользователь сохранен: john@example.com
+2025-12-28 00:03:37.130 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.138 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.139 [main] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (age, created_at, email, name) 
+    values
+        (?, ?, ?, ?)
+2025-12-28 00:03:37.141 [main] INFO  com.example.dao.UserDaoImpl - Пользователь сохранен: user1@test.com
+2025-12-28 00:03:37.142 [main] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (age, created_at, email, name) 
+    values
+        (?, ?, ?, ?)
+2025-12-28 00:03:37.143 [main] INFO  com.example.dao.UserDaoImpl - Пользователь сохранен: user2@test.com
+2025-12-28 00:03:37.153 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_,
+        user0_.age as age2_0_,
+        user0_.created_at as created_3_0_,
+        user0_.email as email4_0_,
+        user0_.name as name5_0_ 
+    from
+        users user0_
+2025-12-28 00:03:37.161 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.164 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.171 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_,
+        user0_.age as age2_0_,
+        user0_.created_at as created_3_0_,
+        user0_.email as email4_0_,
+        user0_.name as name5_0_ 
+    from
+        users user0_ 
+    where
+        user0_.email=?
+2025-12-28 00:03:37.173 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.175 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.176 [main] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (age, created_at, email, name) 
+    values
+        (?, ?, ?, ?)
+2025-12-28 00:03:37.178 [main] INFO  com.example.dao.UserDaoImpl - Пользователь сохранен: original@example.com
+2025-12-28 00:03:37.184 [main] DEBUG org.hibernate.SQL - 
+    update
+        users 
+    set
+        age=?,
+        email=?,
+        name=? 
+    where
+        id=?
+2025-12-28 00:03:37.188 [main] INFO  com.example.dao.UserDaoImpl - Пользователь обновлен: updated@example.com
+2025-12-28 00:03:37.188 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.191 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.193 [main] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (age, created_at, email, name) 
+    values
+        (?, ?, ?, ?)
+2025-12-28 00:03:37.194 [main] INFO  com.example.dao.UserDaoImpl - Пользователь сохранен: jane@example.com
+2025-12-28 00:03:37.198 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_0_,
+        user0_.age as age2_0_0_,
+        user0_.created_at as created_3_0_0_,
+        user0_.email as email4_0_0_,
+        user0_.name as name5_0_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+2025-12-28 00:03:37.202 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.204 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.206 [main] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (age, created_at, email, name) 
+    values
+        (?, ?, ?, ?)
+2025-12-28 00:03:37.207 [main] INFO  com.example.dao.UserDaoImpl - Пользователь сохранен: test@example.com
+2025-12-28 00:03:37.207 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_,
+        user0_.age as age2_0_,
+        user0_.created_at as created_3_0_,
+        user0_.email as email4_0_,
+        user0_.name as name5_0_ 
+    from
+        users user0_ 
+    where
+        user0_.email=?
+2025-12-28 00:03:37.209 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.211 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.213 [main] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        users
+        (age, created_at, email, name) 
+    values
+        (?, ?, ?, ?)
+2025-12-28 00:03:37.214 [main] INFO  com.example.dao.UserDaoImpl - Пользователь сохранен: delete@example.com
+2025-12-28 00:03:37.215 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_0_,
+        user0_.age as age2_0_0_,
+        user0_.created_at as created_3_0_0_,
+        user0_.email as email4_0_0_,
+        user0_.name as name5_0_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+2025-12-28 00:03:37.217 [main] INFO  com.example.dao.UserDaoImpl - Пользователь удален: ID 15
+2025-12-28 00:03:37.218 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users 
+    where
+        id=?
+2025-12-28 00:03:37.220 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_0_,
+        user0_.age as age2_0_0_,
+        user0_.created_at as created_3_0_0_,
+        user0_.email as email4_0_0_,
+        user0_.name as name5_0_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+2025-12-28 00:03:37.222 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.224 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.225 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_0_,
+        user0_.age as age2_0_0_,
+        user0_.created_at as created_3_0_0_,
+        user0_.email as email4_0_0_,
+        user0_.name as name5_0_0_ 
+    from
+        users user0_ 
+    where
+        user0_.id=?
+2025-12-28 00:03:37.226 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.228 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.229 [main] DEBUG org.hibernate.SQL - 
+    select
+        user0_.id as id1_0_,
+        user0_.age as age2_0_,
+        user0_.created_at as created_3_0_,
+        user0_.email as email4_0_,
+        user0_.name as name5_0_ 
+    from
+        users user0_
+2025-12-28 00:03:37.231 [main] DEBUG org.hibernate.SQL - 
+    delete 
+    from
+        users
+2025-12-28 00:03:37.234 [main] INFO  com.example.util.HibernateUtil - SessionFactory закрыта
+2025-12-28 00:03:38.283 [main] INFO  com.example.service.UserService - Получение пользователя по ID: 999
+2025-12-28 00:03:38.342 [main] INFO  com.example.service.UserService - Обновление пользователя ID: 1
+2025-12-28 00:03:38.347 [main] INFO  com.example.service.UserService - Получение всех пользователей
+2025-12-28 00:03:38.355 [main] INFO  com.example.service.UserService - Обновление пользователя ID: 999
+2025-12-28 00:03:38.355 [main] WARN  com.example.service.UserService - Пользователь с ID 999 не найден
+2025-12-28 00:03:38.364 [main] INFO  com.example.service.UserService - Удаление пользователя ID: 1
+2025-12-28 00:03:38.369 [main] INFO  com.example.service.UserService - Создание пользователя: New User, existing@example.com
+2025-12-28 00:03:38.369 [main] WARN  com.example.service.UserService - Пользователь с email existing@example.com уже существует
+2025-12-28 00:03:38.374 [main] INFO  com.example.service.UserService - Создание пользователя: Test User, test@example.com
+2025-12-28 00:03:38.378 [main] INFO  com.example.service.UserService - Получение пользователя по ID: 1
