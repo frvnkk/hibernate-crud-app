@@ -154,4 +154,33 @@ class UserControllerTest {
 
         verify(userService, times(1)).deleteUser(1L);
     }
+    @Test
+    void getUserById_UserNotFound_ReturnsBadRequest() throws Exception {
+        when(userService.getUserById(999L))
+                .thenThrow(new RuntimeException("User not found"));
+
+        mockMvc.perform(get("/api/users/{id}", 999L))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.error").value("User not found"))  // Новый формат
+                .andExpect(jsonPath("$.status").value("400"));           // Новый формат
+
+        verify(userService, times(1)).getUserById(999L);
+    }
+
+    @Test
+    void createUser_InvalidRequest_ReturnsValidationErrors() throws Exception {
+        UserRequestDto requestDto = new UserRequestDto();
+        requestDto.setName("");  // Пустое имя - нарушение @NotBlank
+        requestDto.setEmail("invalid-email");  // Нарушение @Email
+
+        mockMvc.perform(post("/api/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(requestDto)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.name").exists())  // Ошибка валидации имени
+                .andExpect(jsonPath("$.email").exists()) // Ошибка валидации email
+                .andExpect(jsonPath("$.status").value("400"));
+
+        verify(userService, never()).createUser(any(UserRequestDto.class));
+    }
 }

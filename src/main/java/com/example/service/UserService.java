@@ -4,6 +4,8 @@ import com.example.dto.UserRequestDto;
 import com.example.dto.UserResponseDto;
 import com.example.dto.UserMapper;
 import com.example.entity.User;
+import com.example.exception.UserAlreadyExistsException;
+import com.example.exception.UserNotFoundException;
 import com.example.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +29,7 @@ public class UserService {
         log.info("Creating user: {}, {}", requestDto.getName(), requestDto.getEmail());
 
         if (userRepository.existsByEmail(requestDto.getEmail())) {
-            throw new RuntimeException("User with email " + requestDto.getEmail() + " already exists");
+            throw new UserAlreadyExistsException(requestDto.getEmail());
         }
 
         User user = userMapper.toEntity(requestDto);
@@ -40,7 +42,7 @@ public class UserService {
         log.info("Getting user by ID: {}", id);
 
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+                .orElseThrow(() -> new UserNotFoundException(id));
 
         return userMapper.toDto(user);
     }
@@ -58,12 +60,11 @@ public class UserService {
         log.info("Updating user ID: {}", id);
 
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+                .orElseThrow(() -> new UserNotFoundException(id));
 
-        // Проверяем, не занят ли новый email другим пользователем
         if (!user.getEmail().equals(requestDto.getEmail()) &&
                 userRepository.existsByEmail(requestDto.getEmail())) {
-            throw new RuntimeException("Email " + requestDto.getEmail() + " is already taken");
+            throw new UserAlreadyExistsException(requestDto.getEmail());
         }
 
         user.setName(requestDto.getName());
@@ -79,7 +80,7 @@ public class UserService {
         log.info("Deleting user ID: {}", id);
 
         if (!userRepository.existsById(id)) {
-            throw new RuntimeException("User not found with id: " + id);
+            throw new UserNotFoundException(id);
         }
 
         userRepository.deleteById(id);
