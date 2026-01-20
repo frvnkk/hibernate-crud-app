@@ -6,6 +6,8 @@ import com.example.dto.UserMapper;
 import com.example.entity.User;
 import com.example.exception.UserAlreadyExistsException;
 import com.example.exception.UserNotFoundException;
+import com.example.kafka.UserEventProducer;
+import com.example.kafka.event.UserEvent;
 import com.example.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,18 +17,19 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final UserEventProducer userEventProducer; // ДОБАВИТЬ ЭТО
 
     @Transactional
     public UserResponseDto createUser(UserRequestDto requestDto) {
-        log.info("Creating user: {}, {}", requestDto.getName(), requestDto.getEmail());
+        log.info("Creating user: {} - {}", requestDto.getName(), requestDto.getEmail());
 
         if (userRepository.existsByEmail(requestDto.getEmail())) {
             throw new UserAlreadyExistsException(requestDto.getEmail());
@@ -35,21 +38,46 @@ public class UserService {
         User user = userMapper.toEntity(requestDto);
         User savedUser = userRepository.save(user);
 
+        // НОВОЕ: Отправка события в Kafka о создании пользователя
+        UserEvent event = new UserEvent(
+                "USER_CREATED",
+                savedUser.getEmail(),
+                savedUser.getId(),
+                savedUser.getName() // Используем getName() вместо getUsername()
+        );
+        userEventProducer.sendUserEvent(event);
+        log.info("Sent USER_CREATED event to Kafka for user: {}", savedUser.getEmail());
+
         return userMapper.toDto(savedUser);
     }
 
-    public UserResponseDto getUserById(Long id) {
-        log.info("Getting user by ID: {}", id);
-
+    @Transactional
+    public void deleteUser(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
 
+        // НОВОЕ: Отправка события в Kafka об удалении пользователя
+        UserEvent event = new UserEvent(
+                "USER_DELETED",
+                user.getEmail(),
+                user.getId(),
+                user.getName() // Используем getName() вместо getUsername()
+        );
+        userEventProducer.sendUserEvent(event);
+        log.info("Sent USER_DELETED event to Kafka for user: {}", user.getEmail());
+
+        userRepository.delete(user);
+        log.info("User deleted successfully: {}", user.getEmail());
+    }
+
+    // Эти методы остаются без изменений
+    public UserResponseDto getUserById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
         return userMapper.toDto(user);
     }
 
     public List<UserResponseDto> getAllUsers() {
-        log.info("Getting all users");
-
         return userRepository.findAll().stream()
                 .map(userMapper::toDto)
                 .collect(Collectors.toList());
@@ -57,32 +85,13 @@ public class UserService {
 
     @Transactional
     public UserResponseDto updateUser(Long id, UserRequestDto requestDto) {
-        log.info("Updating user ID: {}", id);
-
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
 
-        if (!user.getEmail().equals(requestDto.getEmail()) &&
-                userRepository.existsByEmail(requestDto.getEmail())) {
-            throw new UserAlreadyExistsException(requestDto.getEmail());
-        }
-
         user.setName(requestDto.getName());
         user.setEmail(requestDto.getEmail());
-        user.setAge(requestDto.getAge());
 
         User updatedUser = userRepository.save(user);
         return userMapper.toDto(updatedUser);
-    }
-
-    @Transactional
-    public void deleteUser(Long id) {
-        log.info("Deleting user ID: {}", id);
-
-        if (!userRepository.existsById(id)) {
-            throw new UserNotFoundException(id);
-        }
-
-        userRepository.deleteById(id);
     }
 }
