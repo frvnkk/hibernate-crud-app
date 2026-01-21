@@ -3,7 +3,7 @@ package com.example.kafka.event;
 import java.time.LocalDateTime;
 
 public class UserEvent {
-    private EventType eventType; // Используем Enum вместо String
+    private EventType eventType;
     private String email;
     private Long userId;
     private LocalDateTime timestamp;

@@ -20,17 +20,17 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)  // Используем Mockito без Spring
+@ExtendWith(MockitoExtension.class)
 class UserServiceTest {
 
     @Mock
-    private UserRepository userRepository;  // Обычный @Mock, не @MockBean
+    private UserRepository userRepository;
 
     @Mock
     private UserMapper userMapper;
 
     @InjectMocks
-    private UserService userService;  // Создает экземпляр, инжектит моки
+    private UserService userService;
 
     @Test
     void createUser_Success() {

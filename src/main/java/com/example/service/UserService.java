@@ -26,7 +26,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
-    private final UserEventProducer userEventProducer; // ДОБАВИТЬ ЭТО
+    private final UserEventProducer userEventProducer;
 
     @Transactional
     public UserResponseDto createUser(UserRequestDto requestDto) {
@@ -39,12 +39,12 @@ public class UserService {
         User user = userMapper.toEntity(requestDto);
         User savedUser = userRepository.save(user);
 
-        // НОВОЕ: Отправка события в Kafka о создании пользователя
+        // Отправка события в Kafka о создании пользователя
         UserEvent event = new UserEvent(
-                EventType.USER_CREATED,  // Используем Enum
+                EventType.USER_CREATED,
                 savedUser.getEmail(),
                 savedUser.getId(),
-                savedUser.getName() // Используем getName() вместо getUsername()
+                savedUser.getName()
         );
         userEventProducer.sendUserEvent(event);
         log.info("Sent USER_CREATED event to Kafka for user: {}", savedUser.getEmail());
@@ -57,12 +57,12 @@ public class UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
 
-        // НОВОЕ: Отправка события в Kafka об удалении пользователя
+        // Отправка события в Kafka об удалении пользователя
         UserEvent event = new UserEvent(
-                EventType.USER_DELETED,  // Используем Enum
+                EventType.USER_DELETED,
                 user.getEmail(),
                 user.getId(),
-                user.getName() // Используем getName() вместо getUsername()
+                user.getName()
         );
         userEventProducer.sendUserEvent(event);
         log.info("Sent USER_DELETED event to Kafka for user: {}", user.getEmail());
