@@ -1,25 +1,16 @@
-package com.example.kafka.event;
+package com.example.dto;
 
+import com.example.kafka.event.EventType;
 import java.time.LocalDateTime;
 
-public class UserEvent {
-    private EventType eventType; // Используем Enum вместо String
+public class UserEventDto {
+    private EventType eventType;
     private String email;
     private Long userId;
     private LocalDateTime timestamp;
     private String username;
 
-    public UserEvent() {}
-
-    public UserEvent(EventType eventType, String email, Long userId, String username) {
-        this.eventType = eventType;
-        this.email = email;
-        this.userId = userId;
-        this.username = username;
-        this.timestamp = LocalDateTime.now();
-    }
-
-    // Геттеры и сеттеры
+    // Конструкторы, геттеры, сеттеры
     public EventType getEventType() { return eventType; }
     public void setEventType(EventType eventType) { this.eventType = eventType; }
 

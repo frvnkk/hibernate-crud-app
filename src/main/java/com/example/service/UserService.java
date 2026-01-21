@@ -8,6 +8,7 @@ import com.example.exception.UserAlreadyExistsException;
 import com.example.exception.UserNotFoundException;
 import com.example.kafka.UserEventProducer;
 import com.example.kafka.event.UserEvent;
+import com.example.kafka.event.EventType;
 import com.example.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +41,7 @@ public class UserService {
 
         // НОВОЕ: Отправка события в Kafka о создании пользователя
         UserEvent event = new UserEvent(
-                "USER_CREATED",
+                EventType.USER_CREATED,  // Используем Enum
                 savedUser.getEmail(),
                 savedUser.getId(),
                 savedUser.getName() // Используем getName() вместо getUsername()
@@ -58,7 +59,7 @@ public class UserService {
 
         // НОВОЕ: Отправка события в Kafka об удалении пользователя
         UserEvent event = new UserEvent(
-                "USER_DELETED",
+                EventType.USER_DELETED,  // Используем Enum
                 user.getEmail(),
                 user.getId(),
                 user.getName() // Используем getName() вместо getUsername()
