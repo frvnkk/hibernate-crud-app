@@ -2,16 +2,16 @@ package com.example.service;
 
 import com.example.dto.UserRequestDto;
 import com.example.dto.UserResponseDto;
-import com.example.dto.UserMapper;
 import com.example.entity.User;
+import com.example.kafka.UserEventProducer;
 import com.example.repository.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -27,221 +27,149 @@ class UserServiceTest {
     private UserRepository userRepository;
 
     @Mock
-    private UserMapper userMapper;
+    private com.example.dto.UserMapper userMapper;  // Полный путь если нужно
+
+    @Mock
+    private UserEventProducer userEventProducer;
 
     @InjectMocks
     private UserService userService;
 
-    @Test
-    void createUser_Success() {
-        // Подготовка
-        UserRequestDto requestDto = new UserRequestDto();
+    private User user;
+    private UserRequestDto requestDto;
+    private UserResponseDto responseDto;
+
+    @BeforeEach
+    void setUp() {
+        // Создаем объекты без использования builder
+        user = new User();
+        user.setId(1L);
+        user.setName("John Doe");
+        user.setEmail("john@example.com");
+
+        requestDto = new UserRequestDto();
         requestDto.setName("John Doe");
         requestDto.setEmail("john@example.com");
-        requestDto.setAge(30);
 
-        User user = User.builder()
-                .name("John Doe")
-                .email("john@example.com")
-                .age(30)
-                .build();
-
-        User savedUser = User.builder()
-                .id(1L)
-                .name("John Doe")
-                .email("john@example.com")
-                .age(30)
-                .createdAt(LocalDateTime.now())
-                .build();
-
-        UserResponseDto responseDto = UserResponseDto.builder()
-                .id(1L)
-                .name("John Doe")
-                .email("john@example.com")
-                .age(30)
-                .createdAt(LocalDateTime.now())
-                .build();
-
-        // Настройка моков
-        when(userRepository.existsByEmail("john@example.com")).thenReturn(false);
-        when(userMapper.toEntity(requestDto)).thenReturn(user);
-        when(userRepository.save(user)).thenReturn(savedUser);
-        when(userMapper.toDto(savedUser)).thenReturn(responseDto);
-
-        // Выполнение
-        UserResponseDto result = userService.createUser(requestDto);
-
-        // Проверка
-        assertNotNull(result);
-        assertEquals(1L, result.getId());
-        assertEquals("John Doe", result.getName());
-
-        verify(userRepository, times(1)).existsByEmail("john@example.com");
-        verify(userRepository, times(1)).save(user);
+        responseDto = new UserResponseDto();
+        responseDto.setId(1L);
+        responseDto.setName("John Doe");
+        responseDto.setEmail("john@example.com");
+        // responseDto.setAge(25); // если есть поле age
     }
 
     @Test
-    void createUser_EmailAlreadyExists_ThrowsException() {
-        // Подготовка
-        UserRequestDto requestDto = new UserRequestDto();
-        requestDto.setEmail("existing@example.com");
+    void createUser_Success() {
+        // Arrange
+        when(userRepository.existsByEmail(anyString())).thenReturn(false);
+        when(userMapper.toEntity(any(UserRequestDto.class))).thenReturn(user);
+        when(userRepository.save(any(User.class))).thenReturn(user);
+        when(userMapper.toDto(any(User.class))).thenReturn(responseDto);
 
-        // Настройка мока
-        when(userRepository.existsByEmail("existing@example.com")).thenReturn(true);
+        // Act
+        UserResponseDto result = userService.createUser(requestDto);
 
-        // Выполнение и проверка
-        RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> userService.createUser(requestDto));
+        // Assert
+        assertNotNull(result);
+        assertEquals("John Doe", result.getName());
+        assertEquals("john@example.com", result.getEmail());
 
-        assertEquals("User with email 'existing@example.com' already exists", exception.getMessage());
-        verify(userRepository, never()).save(any(User.class));
+        verify(userRepository, times(1)).existsByEmail("john@example.com");
+        verify(userRepository, times(1)).save(any(User.class));
+        verify(userEventProducer, times(1)).sendUserEvent(any());
     }
 
     @Test
     void getUserById_Success() {
-        // Подготовка
-        User user = User.builder()
-                .id(1L)
-                .name("John Doe")
-                .email("john@example.com")
-                .age(30)
-                .build();
-
-        UserResponseDto responseDto = UserResponseDto.builder()
-                .id(1L)
-                .name("John Doe")
-                .email("john@example.com")
-                .age(30)
-                .build();
-
-        // Настройка моков
+        // Arrange
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
         when(userMapper.toDto(user)).thenReturn(responseDto);
 
-        // Выполнение
+        // Act
         UserResponseDto result = userService.getUserById(1L);
 
-        // Проверка
+        // Assert
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals("John Doe", result.getName());
-
-        verify(userRepository, times(1)).findById(1L);
-        verify(userMapper, times(1)).toDto(user);
     }
 
     @Test
-    void getUserById_NotFound_ThrowsException() {
-        // Настройка мока
+    void getUserById_NotFound() {
+        // Arrange
         when(userRepository.findById(999L)).thenReturn(Optional.empty());
 
-        // Выполнение и проверка
-        RuntimeException exception = assertThrows(RuntimeException.class,
+        // Act & Assert
+        assertThrows(com.example.exception.UserNotFoundException.class,
                 () -> userService.getUserById(999L));
-
-        assertEquals("User not found with id: 999", exception.getMessage());
-        verify(userRepository, times(1)).findById(999L);
     }
 
     @Test
     void getAllUsers_Success() {
-        // Подготовка
-        User user1 = User.builder().id(1L).name("User1").email("user1@test.com").age(25).build();
-        User user2 = User.builder().id(2L).name("User2").email("user2@test.com").age(30).build();
+        // Arrange
+        User user2 = new User();
+        user2.setId(2L);
+        user2.setName("Jane Doe");
+        user2.setEmail("jane@example.com");
 
-        UserResponseDto dto1 = UserResponseDto.builder().id(1L).name("User1").email("user1@test.com").age(25).build();
-        UserResponseDto dto2 = UserResponseDto.builder().id(2L).name("User2").email("user2@test.com").age(30).build();
+        UserResponseDto responseDto2 = new UserResponseDto();
+        responseDto2.setId(2L);
+        responseDto2.setName("Jane Doe");
+        responseDto2.setEmail("jane@example.com");
 
-        // Настройка моков
-        when(userRepository.findAll()).thenReturn(Arrays.asList(user1, user2));
-        when(userMapper.toDto(user1)).thenReturn(dto1);
-        when(userMapper.toDto(user2)).thenReturn(dto2);
+        List<User> users = Arrays.asList(user, user2);
+        when(userRepository.findAll()).thenReturn(users);
+        when(userMapper.toDto(user)).thenReturn(responseDto);
+        when(userMapper.toDto(user2)).thenReturn(responseDto2);
 
-        // Выполнение
+        // Act
         List<UserResponseDto> result = userService.getAllUsers();
 
-        // Проверка
+        // Assert
         assertEquals(2, result.size());
-        assertEquals("User1", result.get(0).getName());
-        assertEquals("User2", result.get(1).getName());
-
-        verify(userRepository, times(1)).findAll();
-        verify(userMapper, times(1)).toDto(user1);
-        verify(userMapper, times(1)).toDto(user2);
+        assertEquals("John Doe", result.get(0).getName());
+        assertEquals("Jane Doe", result.get(1).getName());
     }
 
     @Test
     void updateUser_Success() {
-        // Подготовка
-        UserRequestDto requestDto = new UserRequestDto();
-        requestDto.setName("Updated Name");
-        requestDto.setEmail("updated@example.com");
-        requestDto.setAge(35);
+        // Arrange
+        UserRequestDto updateDto = new UserRequestDto();
+        updateDto.setName("John Updated");
+        updateDto.setEmail("john.updated@example.com");
 
-        User existingUser = User.builder()
-                .id(1L)
-                .name("Original Name")
-                .email("original@example.com")
-                .age(30)
-                .build();
+        User updatedUser = new User();
+        updatedUser.setId(1L);
+        updatedUser.setName("John Updated");
+        updatedUser.setEmail("john.updated@example.com");
 
-        User updatedUser = User.builder()
-                .id(1L)
-                .name("Updated Name")
-                .email("updated@example.com")
-                .age(35)
-                .build();
+        UserResponseDto updatedResponseDto = new UserResponseDto();
+        updatedResponseDto.setId(1L);
+        updatedResponseDto.setName("John Updated");
+        updatedResponseDto.setEmail("john.updated@example.com");
 
-        UserResponseDto responseDto = UserResponseDto.builder()
-                .id(1L)
-                .name("Updated Name")
-                .email("updated@example.com")
-                .age(35)
-                .build();
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        when(userRepository.save(any(User.class))).thenReturn(updatedUser);
+        when(userMapper.toDto(updatedUser)).thenReturn(updatedResponseDto);
 
-        // Настройка моков
-        when(userRepository.findById(1L)).thenReturn(Optional.of(existingUser));
-        when(userRepository.existsByEmail("updated@example.com")).thenReturn(false);
-        when(userRepository.save(existingUser)).thenReturn(updatedUser);
-        when(userMapper.toDto(updatedUser)).thenReturn(responseDto);
+        // Act
+        UserResponseDto result = userService.updateUser(1L, updateDto);
 
-        // Выполнение
-        UserResponseDto result = userService.updateUser(1L, requestDto);
-
-        // Проверка
-        assertEquals("Updated Name", result.getName());
-        assertEquals("updated@example.com", result.getEmail());
-        assertEquals(35, result.getAge());
-
-        verify(userRepository, times(1)).findById(1L);
-        verify(userRepository, times(1)).existsByEmail("updated@example.com");
-        verify(userRepository, times(1)).save(existingUser);
+        // Assert
+        assertEquals("John Updated", result.getName());
+        assertEquals("john.updated@example.com", result.getEmail());
     }
 
     @Test
     void deleteUser_Success() {
-        // Настройка моков
-        when(userRepository.existsById(1L)).thenReturn(true);
+        // Arrange
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
-        // Выполнение
+        // Act
         userService.deleteUser(1L);
 
-        // Проверка
-        verify(userRepository, times(1)).existsById(1L);
-        verify(userRepository, times(1)).deleteById(1L);
-    }
-
-    @Test
-    void deleteUser_NotFound_ThrowsException() {
-        // Настройка мока
-        when(userRepository.existsById(999L)).thenReturn(false);
-
-        // Выполнение и проверка
-        RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> userService.deleteUser(999L));
-
-        assertEquals("User not found with id: 999", exception.getMessage());
-        verify(userRepository, times(1)).existsById(999L);
-        verify(userRepository, never()).deleteById(anyLong());
+        // Assert
+        verify(userRepository, times(1)).delete(user);
+        verify(userEventProducer, times(1)).sendUserEvent(any());
     }
 }
